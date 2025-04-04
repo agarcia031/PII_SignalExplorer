@@ -41,7 +41,7 @@ export default function Home() {
     <div >
       <h1>Onde sinusoïdale &#128526;</h1>
 
-      <div className="flex flex-row justify-center gap-4 w-full max-w-screen-xl mx-auto py-8">
+      <div className="flex flex-row justify-center gap-2 w-full max-w-screen-xl mx-auto py-8">
         {/* Plot temporel */}
         <div className="flex-[1] min-w-0">
           <TemporalPlot signal={signal} xValues={xValues} />

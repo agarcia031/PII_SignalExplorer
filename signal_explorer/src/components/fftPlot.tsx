@@ -45,7 +45,7 @@ const FFTPlot = ({ signal, Fe }: { signal: number[], Fe:number }) => {
           //title: { text: 'Amplitude' },
           showgrid: true,
           zeroline: false,
-          range: [0, 1000],
+          range: [0, 1],
         },
         showlegend: true,
         //margin: { t: 50, b: 50, l: 50, r: 50 },
