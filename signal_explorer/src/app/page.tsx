@@ -56,7 +56,7 @@ export default function Home() {
 
       <Slider value={frequence} onChange={setFrequence} horizontal={true}/>
       {/* Bouton pour jouer le son */}
-      <SoundPlayer frequence={frequence} amplitude={amplitude} />
+      <SoundPlayer signal={signal} sampleRate={Fe} />
 
       <Link legacyBehavior href="/addWaves">
         <a>Continuer</a>
