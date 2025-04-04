@@ -24,7 +24,8 @@ const Slider: React.FC<SliderProps> = ({ value, onChange, horizontal}) => {
         </div>)
 
     else return (
-        <div className="flex flex-col items-center absolute right-0 top-1/2 transform -translate-y-1/2">
+        <div className="flex flex-col items-center justify-center transform translate-x-6 px-1 z-50">
+            <span className="mb-18 text-lg font-bold">{value}</span>
             <input
                 type="range"
                 min="0"
@@ -32,9 +33,9 @@ const Slider: React.FC<SliderProps> = ({ value, onChange, horizontal}) => {
                 step="0.01"
                 value={value}
                 onChange={(e) => onChange(Number(e.target.value))}
-                className="rotate-[-90deg] bg-gray-300 rounded-lg h-64"
+                className="rotate-[-90deg] w-40"
             />
-            <span className="space-x-1 text-lg font-bold">{value}</span>
+            
         </div>);
 }
 

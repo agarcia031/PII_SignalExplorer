@@ -41,14 +41,22 @@ export default function Home() {
     <div >
       <h1>Onde sinusoïdale &#128526;</h1>
 
-      <Slider value={frequence} onChange={setFrequence} horizontal={true}/>
-      <Slider  value={amplitude} onChange={setAmplitude} horizontal={false}/>
+      <div className="flex flex-row justify-center gap-4 w-full max-w-screen-xl mx-auto py-8">
+        {/* Plot temporel */}
+        <div className="flex-[1] min-w-0">
+          <TemporalPlot signal={signal} xValues={xValues} />
+        </div>
+        {/* Slider vertical entre les deux plot*/}
+        <Slider  value={amplitude} onChange={setAmplitude} horizontal={false}/>
+        {/* FFT Plot */}
+        <div className="flex-[1] min-w-0 transform -translate-x-18">
+          <FFTPlot signal={signal} Fe={Fe} />
+        </div>
+      </div>
 
+      <Slider value={frequence} onChange={setFrequence} horizontal={true}/>
       {/* Bouton pour jouer le son */}
       <SoundPlayer frequence={frequence} amplitude={amplitude} />
-
-      <TemporalPlot signal={signal} xValues={xValues}/>
-      <FFTPlot signal={signal}/>
 
       <Link legacyBehavior href="/addWaves">
         <a>Continuer</a>

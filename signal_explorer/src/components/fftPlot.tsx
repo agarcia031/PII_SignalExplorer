@@ -4,12 +4,12 @@ import calculateFFT from './calculateFFT';
 
 const Plot = dynamic(() => import('react-plotly.js'), { ssr: false });
 
-const FFTPlot = ({ signal }: { signal: number[] }) => {
+const FFTPlot = ({ signal, Fe }: { signal: number[], Fe:number }) => {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
     // Calcul de la transformée de Fourier
-    const { freqs, amplitude } = calculateFFT(signal);
+    const { freqs, amplitude } = calculateFFT(signal, Fe);
 
     // Mettre à jour l'état avec les données à afficher
     setData({
@@ -18,7 +18,6 @@ const FFTPlot = ({ signal }: { signal: number[] }) => {
         y: amplitude,
         type: 'scatter',
         mode: 'lines',
-        name: 'Transformée de Fourier',
       }
     });
   }, [signal]);
@@ -29,7 +28,13 @@ const FFTPlot = ({ signal }: { signal: number[] }) => {
     <Plot
       data={[data.fft]}
       layout={{
-        title: 'Transformée de Fourier',
+        title: {
+          text: 'Signal fréquentiel',
+          y: 0.9, // Plus bas
+          x: 0.5, // Centré horizontalement
+          xanchor: 'center',
+          yanchor: 'top',
+        },
         xaxis: {
           title: { text: 'Fréquence (Hz)' },
           showgrid: true,
@@ -37,15 +42,14 @@ const FFTPlot = ({ signal }: { signal: number[] }) => {
           range: [0, 1500],
         },
         yaxis: {
-          title: { text: 'Amplitude' },
+          //title: { text: 'Amplitude' },
           showgrid: true,
           zeroline: false,
-          range: [0, 1],
+          range: [0, 1000],
         },
         showlegend: true,
-        margin: { t: 50, b: 50, l: 50, r: 50 },
+        //margin: { t: 50, b: 50, l: 50, r: 50 },
       }}
-      style={{ width: '80%', height: '500px' }}
     />
   );
 };

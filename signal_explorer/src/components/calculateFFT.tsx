@@ -1,6 +1,6 @@
 import FFT from 'fft.js';
 
-const calculateFFT = (signal: number[]) => {
+const calculateFFT = (signal: number[], Fe: number) => {
   const length = signal.length;
 
   // Création de l'instance FFT
@@ -14,7 +14,7 @@ const calculateFFT = (signal: number[]) => {
   fft.completeSpectrum(spectrum);
 
   // Extraire les fréquences et les magnitudes
-  const freqs = Array.from({ length: length /2 }, (_, i) => i * (1 / (length * 0.01)));
+  const freqs = Array.from({ length: length /2 }, (_, i) => i * (Fe / length));
   const amplitude = Array.from({ length: length / 2 }, (_, i) => Math.sqrt(spectrum[2 * i] ** 2 + spectrum[2 * i + 1] ** 2));
 
   return { freqs, amplitude };
