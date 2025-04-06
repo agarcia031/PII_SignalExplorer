@@ -19,23 +19,23 @@ const TemporalPlot = ({ signal, xValues }: { signal: number[], xValues: number[]
       layout={
         { title: {
           text: 'Signal temporel',
-          y: 0.9, // Plus bas
           x: 0.5, // Centré horizontalement
           xanchor: 'center',
           yanchor: 'top',
         }, 
+          margin:{'l':35, 't':60},
           xaxis: { title: {text:'Temps (secondes)'},
           range: [0, 0.1],
           showgrid: true,
           zeroline: false,
           }, 
           yaxis: { //title: {text:'Amplitude'}, 
-            range: [-1, 1],
+            range: [-1.05, 1.05],
             showgrid: true,
             zeroline: false,
            }, // 🔥 Fixe l'axe Y à une plage cohérente
         }}
-      //style={{height: '40%' }}
+      
     />
   );
 };

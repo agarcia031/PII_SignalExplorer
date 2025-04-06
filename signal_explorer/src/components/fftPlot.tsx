@@ -18,6 +18,7 @@ const FFTPlot = ({ signal, Fe }: { signal: number[], Fe:number }) => {
         y: amplitude,
         type: 'scatter',
         mode: 'lines',
+        showlegend: false,
       }
     });
   }, [signal]);
@@ -30,22 +31,23 @@ const FFTPlot = ({ signal, Fe }: { signal: number[], Fe:number }) => {
       layout={{
         title: {
           text: 'Signal fréquentiel',
-          y: 0.9, // Plus bas
           x: 0.5, // Centré horizontalement
           xanchor: 'center',
           yanchor: 'top',
         },
+        margin:{'r':0, 't':60},
+        autosize: false,
         xaxis: {
           title: { text: 'Fréquence (Hz)' },
           showgrid: true,
           zeroline: false,
-          range: [0, 1500],
+          range: [0, 1350],
         },
         yaxis: {
-          //title: { text: 'Amplitude' },
+          title: { text: 'Amplitude (normalisée)' },
           showgrid: true,
           zeroline: false,
-          range: [0, 1],
+          range: [-0.05, 1.05],
         },
         showlegend: true,
         //margin: { t: 50, b: 50, l: 50, r: 50 },

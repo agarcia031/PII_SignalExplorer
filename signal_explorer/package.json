@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "fft.js": "^4.0.4",
     "next": "15.2.4",
     "plotly.js-dist": "^3.0.1",

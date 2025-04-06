@@ -18,13 +18,13 @@ const Slider: React.FC<SliderProps> = ({ value, onChange, horizontal}) => {
             step="1"
             value={value}
             onChange={(e) => onChange(Number(e.target.value))}
-            className="appearance-none bg-gray-300 h-1 rounded-lg"
+            //className="bg-gray-300 h-1 rounded-lg"
         />
-        <span className="mt-2 text-lg font-bold">{value}</span>
+        <span className=" text-lg font-bold">{value} Hz</span>
         </div>)
 
     else return (
-        <div className="flex flex-col items-center justify-center transform translate-x-6 px-1 z-50">
+        <div className="flex flex-col items-center justify-center transform translate-x-6 px-1 z-50 static top-0">
             <span className="mb-18 text-lg font-bold">{value}</span>
             <input
                 type="range"
