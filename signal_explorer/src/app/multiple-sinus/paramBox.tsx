@@ -3,41 +3,45 @@ import '../globals.css';
 import ParamControl from './paramControl';
 
 interface BoiteProps {
-    onRemove: () => void;
-    onValidate: (value: number[]) => void;
     index: number;
+    params : ParamSet;
+    onParamChange: (key: 'frequence' | 'amplitude' | 'phase', value: number) => void;
+    onRemove: () => void;
   }
 
-const ParamBox: React.FC<BoiteProps> = ({ onRemove, onValidate, index }) => {
+const ParamBox: React.FC<BoiteProps> = ({index, params, onParamChange, onRemove}) => {
+  const { frequence, amplitude, phase } = params;
 
-    const [frequence, setFrequence] = useState(440);
-    const [amplitude, setAmplitude] = useState(0.5);
-    const [phase, setPhase] = useState(0);
-    const [isValidated, setIsValidated] = useState(false);
+  const [isValidated, setIsValidated] = useState(false);
 
     const handleChangeFreq = (newFreq: number) => {
         if (newFreq < 40) newFreq = 40;
         if (newFreq > 1200) newFreq = 1200;
-        setFrequence(newFreq);
+        onParamChange('frequence', newFreq);
       };
 
       const handleChangeAmpl = (newAmpl:number) => {
         // On s'assure que la valeur reste dans la plage autorisée
         if (newAmpl < 0) newAmpl = 0;
         if (newAmpl > 1) newAmpl = 1;
-        setAmplitude(newAmpl);
+        onParamChange('amplitude', newAmpl);
       };
 
-      const handleChangePhase = (newPhase:number) => {
-        // On s'assure que la valeur reste dans la plage autorisée
-        if (newPhase < 0) newPhase = 0;
-        if (newPhase > 2 * Math.PI) newPhase = 2 * Math.PI;
-        setPhase(newPhase);
+      const handleChangePhase = (phaseDegrees:number) => {
+        if (phaseDegrees < 0) phaseDegrees = 0;
+        if (phaseDegrees > 159) phaseDegrees = 159;
+        // Conversion de la phase en radian :
+        let newPhase = phaseDegrees * Math.PI / 180;
+        // // On s'assure que la valeur reste dans la plage autorisée
+        // if (newPhase < 0) newPhase = 0;
+        // if (newPhase > 2 * Math.PI) newPhase = 2 * Math.PI;
+        onParamChange('phase', newPhase);
       };
       const phaseDegrees =  Math.round(phase * 180 / Math.PI);
 
 return (
-<div className="w-32 bg-gray-200 border-2 border-black rounded-lg flex flex-col items-center justify-between px-2 py-2 font-semibold shadow-lg space-y-1">
+<div className="w-32 bg-gray-200 border-2 border-black rounded-lg flex flex-col items-center justify-between px-2 py-2 font-semibold shadow-lg space-y-1"
+  onClick={() => setIsValidated(!isValidated)}>
   <div className="self-end">
     <button
       onClick={onRemove}
@@ -65,7 +69,6 @@ return (
         step={1}
         value={frequence}
         onChange={handleChangeFreq}
-        valueConverted={frequence}
         />
       <ParamControl 
         label="Amplitude"
@@ -75,17 +78,15 @@ return (
         step={0.1}
         value={amplitude}
         onChange={handleChangeAmpl}
-        valueConverted={amplitude}
         />
       <ParamControl 
         label="Phase"
         unite="°"
         min={0}
-        max={2 * Math.PI}
-        step={2 * Math.PI / 360}
-        value={phase}
+        max={159}
+        step={1}
+        value={phaseDegrees}
         onChange={handleChangePhase}
-        valueConverted={phaseDegrees}
         />
     </div>
   )}
@@ -93,8 +94,7 @@ return (
   {!isValidated && (
     <button 
       onClick={() => {
-        setIsValidated(true);
-        onValidate([frequence, amplitude, phase]);
+        setIsValidated(true)
       }}
       className="mt-1 bg-blue-500 text-white px-2 py-1 rounded text-xs"
     >

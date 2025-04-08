@@ -6,13 +6,12 @@ interface SliderControlProps {
     step: number;
     value: number;
     onChange: (val: number) => void; // 👈 type de la fonction en props
-    valueConverted: number;
   }
   
-  const ParamControl = ({ label, unite, min, max, step, value, onChange, valueConverted}: SliderControlProps) => {
+  const ParamControl = ({ label, unite, min, max, step, value, onChange}: SliderControlProps) => {
     return (
         <div className="flex flex-col items-center space-y-2">
-        <label className="text-sm font-semibold text-black">{label} : {valueConverted} {unite}</label>
+        <label className="text-sm font-semibold text-black">{label} : {value} {unite}</label>
       
         <div className="flex flex-col items-center space-y-2">
           <input

@@ -5,13 +5,14 @@ import NextButton from '@/components/nextButton';
 import SoundPlayer from '@/components/soundPlayer';
 import ListeSignaux from './listeSignaux';
 
-export default function MultipleSinus() {
+export default function Test() {
+
     return (
         <div>
         <ListeSignaux/>
         {/*<SoundPlayer signal={signal} sampleRate={Fe} />*/}
         <BackHomeButton/>
-        <NextButton route={""} />
+        <NextButton route={"test"} />
         </div>
     );
 }

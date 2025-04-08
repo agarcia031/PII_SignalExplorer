@@ -4,30 +4,45 @@ import AddButton from './addBox';
 import CreateSinus from '@/components/createSinus';
 
 const ListeSignaux = () => {
-  // État pour garder une liste de boîtes
+  // Liste de boîtes
   const [boxes, setBoxes] = useState<number[]>([]);
 
-  // Stocke un tableau de signaux
-  const [signaux, setSignaux] = useState<number[][]>([]); 
+  // Tableau des paramètres de chaque signal
+  const [listeParams, setListeParams] = useState<ParamSet[]>([]);
 
-  // Fonction pour ajouter une nouvelle boite
+  // Fonction pour ajouter une nouvelle boite de paramètres
   const addNewBox = () => {
     if (boxes.length < 10) {
-        setBoxes([...boxes, boxes.length]); // on ajoute juste un ID/index
-      }
+        const newId = boxes.length === 0 ? 0 : Math.max(...boxes) + 1;
+        setBoxes([newId, ...boxes]); // ajoute à gauche
+        setListeParams([...listeParams, { frequence: 440, amplitude: 0.5, phase: 0 } ])
+        }
   };
-
-  const addNewSignal = ({frequence, amplitude,phase}:{frequence:number, amplitude:number, phase:number}) => {
-    const [newSignal] = CreateSinus({frequence, amplitude,phase}); // ne récupère que le signal de CreateSinus
-    setSignaux([...signaux, newSignal]);
-  }
 
   // Supprimer une boîte
-  const removeBox = (index: number) => {
-    setBoxes(boxes.filter((_, i) => i !== index));
-    // On supprime en même temps le signal correspondant
-    setSignaux(signaux.filter((_, i) => i !== index))
+  const removeBox = (indexToRemove: number) => {
+    const newBoxes = boxes.filter((_, i) => i !== indexToRemove);
+    setBoxes(newBoxes);
+    setListeParams(listeParams.filter((_, i) => i !== indexToRemove));
   };
+
+  // Modifier les paramètres d'un signal
+  const updateParamSet = (index: number, key: keyof ParamSet, value: number) => {
+    const updated = [...listeParams];
+    updated[index] = {
+      ...updated[index],
+      [key]: value,
+    };
+    setListeParams(updated);
+  };
+
+  //  // Tableau de tous les signaux
+//const [signaux, setSignaux] = useState<number[][]>([]); 
+
+//   const addNewSignal = ({frequence, amplitude,phase}:{frequence:number, amplitude:number, phase:number}) => {
+//     const [newSignal] = CreateSinus({frequence, amplitude,phase}); // ne récupère que le signal de CreateSinus
+//     setSignaux([...signaux, newSignal]);
+//   }
 
 
   return (
@@ -40,8 +55,7 @@ const ListeSignaux = () => {
         <ParamBox key={index} 
             index={index}
             onRemove={() => removeBox(index)} 
-            onValidate={([frequence, amplitude,phase]) =>addNewSignal({frequence, amplitude,phase})}/>
-      ))}
+      )}
     </div>
   );
 };
