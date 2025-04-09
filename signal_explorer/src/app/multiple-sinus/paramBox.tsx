@@ -5,7 +5,7 @@ import ParamControl from './paramControl';
 interface BoiteProps {
     index: number;
     params : ParamSet;
-    onParamChange: (key: 'frequence' | 'amplitude' | 'phase', value: number) => void;
+    onParamChange:(key: keyof ParamSet, value: number) => void;
     onRemove: () => void;
   }
 
@@ -41,7 +41,8 @@ const ParamBox: React.FC<BoiteProps> = ({index, params, onParamChange, onRemove}
 
 return (
 <div className="w-32 bg-gray-200 border-2 border-black rounded-lg flex flex-col items-center justify-between px-2 py-2 font-semibold shadow-lg space-y-1"
-  onClick={() => setIsValidated(!isValidated)}>
+  onClick={() =>{ if (isValidated) {
+      setIsValidated(false);}}}>
   <div className="self-end">
     <button
       onClick={onRemove}

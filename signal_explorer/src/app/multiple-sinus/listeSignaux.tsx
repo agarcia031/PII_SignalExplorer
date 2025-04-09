@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo} from 'react';
 import ParamBox from './paramBox';
 import AddButton from './addBox';
 import CreateSinus from '@/components/createSinus';
@@ -36,14 +36,19 @@ const ListeSignaux = () => {
     setListeParams(updated);
   };
 
-  //  // Tableau de tous les signaux
-//const [signaux, setSignaux] = useState<number[][]>([]); 
+  //  Tableau de tous les signaux
+const [signaux, setSignaux] = useState<number[][]>([]); 
 
 //   const addNewSignal = ({frequence, amplitude,phase}:{frequence:number, amplitude:number, phase:number}) => {
 //     const [newSignal] = CreateSinus({frequence, amplitude,phase}); // ne récupère que le signal de CreateSinus
 //     setSignaux([...signaux, newSignal]);
 //   }
 
+const listeSignaux = useMemo(() => {
+    return listeParams.map((param) => CreateSinus(param));
+  }, [listeParams]);
+
+//console.log(listeParams)
 
   return (
     <div className="fixed bottom-8 left-8 flex items-end space-x-4 z-50">
@@ -51,11 +56,15 @@ const ListeSignaux = () => {
             onClick={addNewBox} 
             disabled={boxes.length >= 10} 
         />
-      {boxes.map((_, index) => (
-        <ParamBox key={index} 
+        {boxes.map((_, index) => (
+        <ParamBox
+            key={index}
             index={index}
-            onRemove={() => removeBox(index)} 
-      )}
+            params={listeParams[index]}
+            onParamChange={(key, value) => updateParamSet(index, key, value)}
+            onRemove={() => removeBox(index)}
+        />
+        ))}
     </div>
   );
 };

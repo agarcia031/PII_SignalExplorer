@@ -2,7 +2,7 @@ import FFT from 'fft.js';
 
 const calculateFFT = (signal: number[], Fe: number) => {
   const length = signal.length;
-
+  
   // Création de l'instance FFT
   const fft = new FFT(length);
 

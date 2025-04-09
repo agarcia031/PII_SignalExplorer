@@ -13,7 +13,7 @@ const AddButton = ({ onClick, disabled = false }: AddButtonProps) => {
       onClick={onClick}
       className="bg-blue-500 text-white px-4 py-2 rounded m-2"
         >
-      Ajouter une boîte
+      Ajouter un signal
     </button>
     );
   };

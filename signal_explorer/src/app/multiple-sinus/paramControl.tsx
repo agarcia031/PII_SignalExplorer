@@ -22,7 +22,6 @@ interface SliderControlProps {
             step={step}
             onChange={(e) => onChange(Number(e.target.value))}
             className="w-16 p-1 border rounded text-xs text-center" // Réduit la largeur de l'input
-            style={{ color: 'transparent' }} 
           />
       
           <input

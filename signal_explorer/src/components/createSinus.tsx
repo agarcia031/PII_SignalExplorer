@@ -18,11 +18,11 @@ const xValues = Array.from({ length: numEch }, (_, i) => (i * step)); // axe des
 
 
 export default function CreateSinus ({frequence, amplitude, phase}
-    :{frequence:number, amplitude:number, phase:number}): number[][] {
+    :{frequence:number, amplitude:number, phase:number}): [number[], number[]] {
   
   // Création d'un signal temporel (sinusoïdal)
   const signal = Array.from({ length: numEch }, (_, i) => 
     amplitude * Math.sin(2 * Math.PI * frequence * (i * step)+ phase)
   );
-    return [signal,xValues];
+    return [xValues,signal];
 };

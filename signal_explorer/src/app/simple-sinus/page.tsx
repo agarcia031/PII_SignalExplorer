@@ -18,12 +18,8 @@ export default function SimpleSinus() {
   const [amplitude, setAmplitude] = useState(0.5);
   const [phase, setPhase] = useState(0); // en radians
 
-  // Fréquence d'échantillonnage
-    const Fe = 44100;
-
   const [signal,xValues] = CreateSinus({frequence, amplitude, phase});
   
-
   return (
     <div >
       <h1 className="text-2xl font-bold text-center mt-4">Onde sinusoïdale &#128526;</h1>
@@ -37,11 +33,11 @@ export default function SimpleSinus() {
         </div>
         <SliderAmpl  value={amplitude} onChange={setAmplitude}/>
         <div className="flex-[1] min-w-0 transform -translate-x-18">   
-            <FFTPlot signal={signal} Fe={Fe} />
+            <FFTPlot signal={signal} Fe={44100} />
         </div>                
       </div>
 
-      <SoundPlayer signal={signal} sampleRate={Fe} />
+      <SoundPlayer signal={signal} sampleRate={44100} />
       <BackHomeButton/>
       <NextButton route="/multiple-sinus" />
     </div>
