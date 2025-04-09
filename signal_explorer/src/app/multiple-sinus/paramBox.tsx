@@ -40,7 +40,7 @@ const ParamBox: React.FC<BoiteProps> = ({index, params, onParamChange, onRemove}
       const phaseDegrees =  Math.round(phase * 180 / Math.PI);
 
 return (
-<div className="w-32 bg-gray-200 border-2 border-black rounded-lg flex flex-col items-center justify-between px-2 py-2 font-semibold shadow-lg space-y-1"
+<div className="w-36 bg-gray-200 border-2 border-black rounded-lg flex flex-col items-center justify-between px-2 py-2 font-semibold shadow-lg space-y-1"
   onClick={() =>{ if (isValidated) {
       setIsValidated(false);}}}>
   <div className="self-end">
@@ -56,11 +56,20 @@ return (
 
   {isValidated ? (
     <div className="flex flex-col text-xs space-y-1 text-center">
-      <span>Fréq: {frequence} Hz</span>
-      <span>Amplitude: {amplitude}</span>
-      <span>Phase: {phaseDegrees}°</span>
+      <span>
+        <span className="font-semibold text-blue-700">Fréquence:</span>{' '}
+        <span className="font-bold text-black">{frequence} Hz</span>
+      </span>
+      <span>
+        <span className="font-semibold text-green-700">Amplitude:</span>{' '}
+        <span className="font-bold text-black">{amplitude}</span>
+      </span>
+      <span>
+        <span className="font-semibold text-purple-700">Phase:</span>{' '}
+        <span className="font-bold text-black">{phaseDegrees}°</span>
+      </span>
     </div>
-  ) : (
+    ) : (
     <div className="flex flex-col space-y-2 text-xs">
       <ParamControl 
         label="Fréquence"

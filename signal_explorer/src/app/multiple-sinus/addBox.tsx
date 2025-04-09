@@ -11,7 +11,10 @@ const AddButton = ({ onClick, disabled = false }: AddButtonProps) => {
       <button
       disabled={disabled}
       onClick={onClick}
-      className="bg-blue-500 text-white px-4 py-2 rounded m-2"
+      className={`px-4 py-2 rounded text-white transition-colors
+        ${disabled 
+          ? 'bg-gray-400 cursor-not-allowed' 
+          : 'bg-blue-500 hover:bg-blue-600 cursor-pointer'}`}
         >
       Ajouter un signal
     </button>

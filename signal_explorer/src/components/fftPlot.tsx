@@ -4,7 +4,7 @@ import calculateFFT from './calculateFFT';
 
 const Plot = dynamic(() => import('react-plotly.js'), { ssr: false });
 
-const FFTPlot = ({ signal, Fe }: { signal: number[], Fe:number }) => {
+const FFTPlot = ({ signal, Fe, yRange }: { signal: number[], Fe:number, yRange:number[] }) => {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const FFTPlot = ({ signal, Fe }: { signal: number[], Fe:number }) => {
           title: { text: 'Amplitude (normalisée)' },
           showgrid: true,
           zeroline: false,
-          range: [-0.05, 1.05],
+          range: yRange,
         },
         showlegend: true,
         //margin: { t: 50, b: 50, l: 50, r: 50 },

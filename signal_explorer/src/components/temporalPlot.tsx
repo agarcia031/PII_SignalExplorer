@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 
 const Plot = dynamic(() => import('react-plotly.js'), { ssr: false });
 
-const TemporalPlot = ({ signal, xValues }: { signal: number[], xValues: number[] }) => {
+const TemporalPlot = ({xValues, signal, title, yRange }: { xValues: number[], signal: number[], title: string, yRange:number[] }) => {
 
   return (
     <Plot
@@ -18,7 +18,7 @@ const TemporalPlot = ({ signal, xValues }: { signal: number[], xValues: number[]
       ]}
       layout={
         { title: {
-          text: 'Signal temporel',
+          text: `${title}`,
           x: 0.5, // Centré horizontalement
           xanchor: 'center',
           yanchor: 'top',
@@ -30,7 +30,7 @@ const TemporalPlot = ({ signal, xValues }: { signal: number[], xValues: number[]
           zeroline: false,
           }, 
           yaxis: { //title: {text:'Amplitude'}, 
-            range: [-1.05, 1.05],
+            range: yRange,
             showgrid: true,
             zeroline: false,
            }, // 🔥 Fixe l'axe Y à une plage cohérente

@@ -65,17 +65,59 @@ export default function Test() {
     
     // console.log(listeParams)
 
+    // Pour l'affichage :
+    const [isSummed, setIsSummed] = useState(false); // Pour savoir si on montre la somme ou tous les signaux
+
     return (
         <div>
-            <div className="flex flex-row">
-                <ManySinusPlot listeSignaux={listeSignaux}/>
-                <TemporalPlot xValues={sumSignaux[0]} signal={sumSignaux[1]}/>
-                {sumSignaux[1].length > 1 && (sumSignaux[1].length & (sumSignaux[1].length - 1)) === 0 && (
-                    <FFTPlot signal={sumSignaux[1]} Fe={44100} />
-                )}
+            <h1 className="text-2xl font-bold text-center mt-4">De quoi se compose un signal ? &#128526;</h1>
+
+            {/* Affichage des plots */}
+            <div className="flex">
+
+            {/* Colonne de gauche */}
+            <div className="w-1/2 p-4 flex flex-col items-center relative">
+
+            {/* Le bouton centré au-dessus du plot */}
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 z-10">
+            <button
+                onClick={() => setIsSummed((prev) => !prev)}
+                className={`px-4 py-2 mb-6 rounded font-semibold transition-colors duration-300 ${
+                isSummed ? 'bg-blue-500 hover:bg-blue-600' : 'bg-green-500 hover:bg-green-600'
+                } text-white shadow`}
+            >
+                {isSummed ? 'Afficher tous les signaux' : 'Afficher somme des signaux'}
+            </button>
             </div>
-            
-            <div className="fixed bottom-8 left-8 flex items-end space-x-4 z-50">
+
+            {/* Le plot en fonction de l'état */}
+                <div className="w-full">
+                {isSummed ? (
+                    <TemporalPlot
+                    xValues={sumSignaux[0]}
+                    signal={sumSignaux[1]}
+                    title=""
+                    yRange={[-1.5, 1.5]}
+                    />
+                ) : (
+                    <ManySinusPlot listeSignaux={listeSignaux} title="" />
+                )}
+                </div>
+            </div>
+
+            {/*  Colonne de droite : FFT */}
+            <div className="w-1/2 p-4">
+                {sumSignaux[1].length > 1 && (sumSignaux[1].length & (sumSignaux[1].length - 1)) === 0 && (
+                <FFTPlot 
+                    signal={sumSignaux[1]} 
+                    Fe={44100}
+                    yRange={[0, 1.7]} />
+                )}
+        </div>
+    </div>
+
+        {/* Gestion des signaux */}    
+            <div className="fixed bottom-4 left-2 flex items-end space-x-2 z-5 ml-4">
         <AddButton 
             onClick={addNewBox} 
             disabled={boxes.length >= 10} 
@@ -91,7 +133,7 @@ export default function Test() {
         ))}
         </div>
         
-        {/*<SoundPlayer signal={signal} sampleRate={Fe} />*/}
+        <SoundPlayer signal={sumSignaux[1]}  sampleRate={44100} />
         <BackHomeButton/>
         <NextButton route={"test"} />
         </div>

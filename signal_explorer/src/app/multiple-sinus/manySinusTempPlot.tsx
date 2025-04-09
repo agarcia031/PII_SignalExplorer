@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 
 const Plot = dynamic(() => import('react-plotly.js'), { ssr: false });
 
-const ManySinusPlot = ({listeSignaux}: {listeSignaux:[number[], number[]][]}) => {
+const ManySinusPlot = ({listeSignaux, title}: {listeSignaux:[number[], number[]][], title:string}) => {
   return (
     <div>
     <Plot
@@ -17,12 +17,12 @@ const ManySinusPlot = ({listeSignaux}: {listeSignaux:[number[], number[]][]}) =>
         ))}
         layout={
             { title: {
-              text: 'Signaux temporels',
+              text: `${title}`,
               x: 0.5, // Centré horizontalement
               xanchor: 'center',
               yanchor: 'top',
             }, 
-              //margin:{'l':35, 't':60},
+              margin:{'l':35, 't':60},
               xaxis: { title: {text:'Temps (secondes)'},
               range: [0, 0.1],
               showgrid: true,
