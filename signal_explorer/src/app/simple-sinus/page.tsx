@@ -9,6 +9,8 @@ import FFTPlot from '@/components/fftPlot';
 import SliderFreq from './sliderFreq';
 import SliderAmpl from './sliderAmpl';
 import SliderPhase from './sliderPhase';
+import InfoPopup from '@/components/infoPopUp';
+import Explications from './explication';
 import '../globals.css';
 
 export default function SimpleSinus() {
@@ -38,8 +40,14 @@ export default function SimpleSinus() {
       </div>
 
       <SoundPlayer signal={signal} sampleRate={44100} />
-      <BackHomeButton/>
-      <NextButton route="/multiple-sinus" />
+      <div className="flex items-center space-x-4">
+        <BackHomeButton/>
+            <InfoPopup 
+              title={"Qu'est-ce que la transformée de Fourier ?"} 
+              message={<Explications />} 
+            />
+      </div>
+        <NextButton route="/multiple-sinus" />
     </div>
   );
 }

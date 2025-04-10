@@ -3,13 +3,15 @@ import { useState, useMemo} from 'react';
 import ParamBox from './paramBox';
 import AddButton from './addBox';
 import CreateSinus from '@/components/createSinus';
+import { CreateSignal } from '@/components/CreateSignalSum';
 import BackHomeButton from '@/components/backHomeButton';
 import NextButton from '@/components/nextButton';
 import SoundPlayer from '@/components/soundPlayer';
 import ManySinusPlot from './manySinusTempPlot';
 import TemporalPlot from '@/components/temporalPlot';
 import FFTPlot from '@/components/fftPlot';
-//import ListeSignaux from './listeSignaux';
+import InfoPopup from '@/components/infoPopUp';
+import Explications from './explications';
 
 export default function Test() {
     // Liste de boîtes
@@ -44,26 +46,10 @@ export default function Test() {
         setListeParams(updated);
       };
     
-    const listeSignaux: [number[], number[]][] = useMemo(() => {
-        return listeParams.map((param) => CreateSinus(param));
-      }, [listeParams]);
+    // Crée chaque sinusoïde
+    const listeSignaux: [number[], number[]][] = listeParams.map((param) => CreateSinus(param));
+    const sumSignaux: [number[], number[]] = useMemo(() => CreateSignal(listeParams), [listeParams]);
 
-    const sumSignaux: [number[], number[]] = useMemo(() => {
-        if (listeSignaux.length === 0) {
-          return [[], []];
-        }
-
-        const [xValues] = listeSignaux[0]; // xValues du premier signal
-        const yValuesSum = xValues.map((_, i) =>
-        listeSignaux.reduce((acc, [, yValues]) => acc + yValues[i], 0)
-        );
-        return [xValues, yValuesSum];
-      }, [listeSignaux]);
-
-      console.log("sumSignaux length:", sumSignaux[1].length);
-
-    
-    // console.log(listeParams)
 
     // Pour l'affichage :
     const [isSummed, setIsSummed] = useState(false); // Pour savoir si on montre la somme ou tous les signaux
@@ -135,7 +121,9 @@ export default function Test() {
         
         <SoundPlayer signal={sumSignaux[1]}  sampleRate={44100} />
         <BackHomeButton/>
-        <NextButton route={"test"} />
+        <InfoPopup title={"De quoi se compose un signal ?"} 
+              message={<Explications/>} />
+        <NextButton route={"jeu"} />
         </div>
     );
 }

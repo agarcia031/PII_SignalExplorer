@@ -7,7 +7,7 @@ type SliderProps = {
 
 const SliderAmpl : React.FC<SliderProps> = ({ value, onChange}) => {
     return (
-        <div className="flex flex-col items-center justify-center transform translate-x-6 px-1 z-50 static top-0">
+        <div className="flex flex-col items-center justify-center transform translate-x-6 px-1 z-10 static top-0">
             <span className="mb-18 text-lg font-bold">{value}</span>
             <input
                 type="range"

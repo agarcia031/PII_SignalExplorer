@@ -3,9 +3,10 @@ import { useEffect, useState, useRef } from 'react';
 interface SoundPlayerProps {
   signal: number[];  // Le signal est un tableau de nombres
   sampleRate: number; // Fréquence d'échantillonnage
+  floating?: boolean
 }
 
-const SoundPlayer = ({ signal, sampleRate }: SoundPlayerProps) => {
+const SoundPlayer = ({ signal, sampleRate, floating=false}: SoundPlayerProps) => {
   const [isPlaying, setIsPlaying] = useState(false); // État pour savoir si le son est en cours
   const audioContextRef = useRef<AudioContext | null>(null); // Référence à l'AudioContext
   const sourceRef = useRef<AudioBufferSourceNode | null>(null); // Référence à la source audio en cours
@@ -85,13 +86,14 @@ const SoundPlayer = ({ signal, sampleRate }: SoundPlayerProps) => {
     }, [signal]);
   
     return (
-      <div className="fixed top-1 right-1 flex flex-col items-center w-32">
+      <div className={`flex flex-col items-center w-32 ${floating ? '' : 'fixed top-1 right-1 z-50'}`}>
       <button
         onClick={handleClick}
         className= {`w-12 h-12 rounded-full flex items-center text-white
-          justify-center ring-2 ${
+          justify-center ring-2 hover:cursor-pointer ${
           isPlaying ? 'bg-red-600' : 'bg-blue-600'
-        } transition duration-300`}>
+        } transition duration-300`}
+        title={`${isPlaying ? "Arrêter la lecture audio":"Lire le signal audio"}`}>
         {/* Icône dynamique */}
         {isPlaying ? (
           <svg 

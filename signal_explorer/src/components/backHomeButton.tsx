@@ -4,7 +4,8 @@ const BackHomeButton = () => {
   return (
     <div className="fixed top-0 left-0 z-10">
       <Link href="/">
-        <button className="px-4 py-2 bg-sky-500/80 text-white rounded-lg shadow-lg hover:bg-blue-500">
+        <button className="px-4 py-2 bg-sky-500/80 text-white rounded-lg shadow-lg hover:bg-blue-500 cursor-pointer"
+          title="Retourner à la page d'accueil">
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
           viewBox="0 0 24 24" 
