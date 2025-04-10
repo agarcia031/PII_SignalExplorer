@@ -1,17 +1,27 @@
-"use client"
-import { useState, useMemo} from 'react';
-import ParamBox from './paramBox';
-import AddButton from './addBox';
-import CreateSinus from '@/components/createSinus';
-import { CreateSignal } from '@/components/CreateSignalSum';
-import BackHomeButton from '@/components/backHomeButton';
-import NextButton from '@/components/nextButton';
-import SoundPlayer from '@/components/soundPlayer';
+"use client";
+
+// Composants de navigation
+import BackHomeButton from '@/components/navigation/backHomeButton';
+import NextButton from '@/components/navigation/nextButton';
+import InfoPopup from '@/components/navigation/infoPopUp';
+
+// Composants d'affichage
+import TemporalPlot from '@/components/plot/temporalPlot';
+import FFTPlot from '@/components/plot/fftPlot';
 import ManySinusPlot from './manySinusTempPlot';
-import TemporalPlot from '@/components/temporalPlot';
-import FFTPlot from '@/components/fftPlot';
-import InfoPopup from '@/components/infoPopUp';
+import SoundPlayer from '@/components/soundPlayer';
+
+// Composant d'explication
 import Explications from './explications';
+
+// Composants pour créer des signaux
+import ParamBox from '@/components/boxToCreateSinus/paramBox';
+import AddButton from '../../components/boxToCreateSinus/addBox';
+import CreateSinus from '@/components/maths/createSinus';
+import { CreateSignal } from '@/components/maths/CreateSignalSum';
+
+// Hooks et logique
+import { useState, useMemo } from 'react';
 
 export default function Test() {
     // Liste de boîtes

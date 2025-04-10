@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from 'next/navigation';
-import BackHomeButton from '@/components/backHomeButton';
+import BackHomeButton from '@/components/navigation/backHomeButton';
 
 export default function ScoreJeu (){
     const searchParams = useSearchParams();

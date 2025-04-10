@@ -1,6 +1,6 @@
 "use client"
 import './globals.css';
-import SidebarMenu from '@/components/SideBarMenu';
+import SidebarMenu from '@/components/navigation/SideBarMenu';
 import Link from 'next/link';
 
 export default function Home() {

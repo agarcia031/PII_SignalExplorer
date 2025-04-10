@@ -1,4 +1,4 @@
-import { CreateSignal} from "@/components/CreateSignalSum";
+import { CreateSignal} from "@/components/maths/CreateSignalSum";
 
 // Signal 1 – 2 sinusoïdes
 const level1: ParamSet[] = [

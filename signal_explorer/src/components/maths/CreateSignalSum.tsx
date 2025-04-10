@@ -1,4 +1,4 @@
-import CreateSinus from "@/components/createSinus";
+import CreateSinus from "@/components/maths/createSinus";
 import { useMemo } from "react";
 
 // Fonction pour créer un signal composé à partir de plusieurs sinusoïdes

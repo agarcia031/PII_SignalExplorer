@@ -1,16 +1,24 @@
-"use client"
-import { useState, useMemo, useEffect } from 'react';
-import BackHomeButton from '@/components/backHomeButton';
-import SoundPlayer from '@/components/soundPlayer';
-import TemporalPlot from '../../components/temporalPlot';
-//import InfoPopup from '@/components/infoPopUp';
-//import Explications from './explication';
-import '../globals.css';
-import ParamBox from '../multiple-sinus/paramBox';
-import AddButton from '../multiple-sinus/addBox';
-import { CreateSignal } from '../../components/CreateSignalSum';
+"use client";
+
+// Composants de navigation
+import BackHomeButton from '@/components/navigation/backHomeButton';
 import NextLevelButton from './nextLevelButton';
-import DisplaySignalToGuess from './signalToGuess';
+
+// Composants d'affichage
+import TemporalPlot from '../../components/plot/temporalPlot';
+import SoundPlayer from '@/components/soundPlayer';
+import DisplaySignalToGuess from './displaySignalToGuess';
+
+// Composants pour créer des signaux
+import ParamBox from '@/components/boxToCreateSinus/paramBox';
+import AddButton from '../../components/boxToCreateSinus/addBox';
+import { CreateSignal } from '../../components/maths/CreateSignalSum';
+
+// Hooks et logique
+import { useState, useMemo, useEffect } from 'react';
+
+// Autres imports spécifiques
+import '../globals.css';
 import computeScore from './computeScore';
 
 export default function Jeu() {
@@ -92,6 +100,22 @@ export default function Jeu() {
 
         // SCORES
        const scores = computeScore(levelsParams);
+    
+    // Réinitialiser les paramètres dans le localStorage et dans le state
+    const resetLevelsParams = () => {
+    for (let i = 1; i <= 5; i++) {
+      localStorage.removeItem(`niveau-${i}-params`);
+    }
+  };
+
+  // Fonction appelée pour rediriger et réinitialiser
+  const handleSubmitAndReset = () => {
+    resetLevelsParams();  // Effacer les paramètres stockés dans le localStorage
+    setLevelsParams([]);  // Réinitialiser les niveaux dans le state
+
+    // Rediriger vers la page des scores
+    window.location.href = `/score-jeu?scores=${JSON.stringify(scores)}`;
+  };
 
   
   return (
@@ -121,7 +145,11 @@ export default function Jeu() {
         
             {/* Boutons pour choisir directement un niveau (1 à 5) */}
         <div className="fixed left-10 flex flex-row space-x-2 ">
-            <NextLevelButton level={level} setLevel={setLevel} scores={scores}/>
+            <NextLevelButton 
+                level={level} 
+                setLevel={setLevel} 
+                scores={scores}
+                handleSubmitAndReset={handleSubmitAndReset}/>
             {[1, 2, 3, 4, 5].map((n) => (
             <button
                 key={n}
@@ -149,15 +177,9 @@ export default function Jeu() {
         ))}
         </div>
 
-        
-
       <SoundPlayer signal={signalChoosen[1]} sampleRate={44100} />
       <div className="flex items-center space-x-4">
         <BackHomeButton/>
-        {/*<InfoPopup 
-            title={"Qu'est-ce que la transformée de Fourier ?"} 
-            message={<Explications />} 
-        />*/}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import calculateFFT from './calculateFFT'; 
+import calculateFFT from '../maths/calculateFFT'; 
 
 const Plot = dynamic(() => import('react-plotly.js'), { ssr: false });
 

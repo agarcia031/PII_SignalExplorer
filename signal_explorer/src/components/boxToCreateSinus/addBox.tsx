@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import '../globals.css';
 
 type AddButtonProps = {
     onClick: () => void;

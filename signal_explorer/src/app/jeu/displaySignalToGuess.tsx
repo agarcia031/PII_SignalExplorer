@@ -1,8 +1,8 @@
 import { useState } from "react";
-import TemporalPlot from "@/components/temporalPlot";
-import FFTPlot from "@/components/fftPlot";
+import TemporalPlot from "@/components/plot/temporalPlot";
+import FFTPlot from "@/components/plot/fftPlot";
 import SoundPlayer from "@/components/soundPlayer";
-import SIGNALS_TO_GUESS from "./fiveLevelsSignals";
+import SIGNALS_TO_GUESS from "./SignalsToGuess";
 
 export default function DisplaySignalToGuess ({
     level

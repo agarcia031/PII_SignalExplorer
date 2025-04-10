@@ -1,17 +1,27 @@
-"use client"
-import { useState } from 'react';
-import BackHomeButton from '@/components/backHomeButton';
-import NextButton from '@/components/nextButton';
-import CreateSinus from '@/components/createSinus';
+"use client";
+
+// Composants de navigation
+import BackHomeButton from '@/components/navigation/backHomeButton';
+import NextButton from '@/components/navigation/nextButton';
+import InfoPopup from '@/components/navigation/infoPopUp';
+
+// Composants d'affichage et de visualisation
+import TemporalPlot from '../../components/plot/temporalPlot';
+import FFTPlot from '@/components/plot/fftPlot';
 import SoundPlayer from '@/components/soundPlayer';
-import TemporalPlot from '../../components/temporalPlot';
-import FFTPlot from '@/components/fftPlot';
+
+// Composants pour la création de signaux
+import CreateSinus from '@/components/maths/createSinus';
 import SliderFreq from './sliderFreq';
 import SliderAmpl from './sliderAmpl';
 import SliderPhase from './sliderPhase';
-import InfoPopup from '@/components/infoPopUp';
+
+// Autres imports spécifiques
 import Explications from './explication';
 import '../globals.css';
+
+// Hooks et logique
+import { useState } from 'react';
 
 export default function SimpleSinus() {
 

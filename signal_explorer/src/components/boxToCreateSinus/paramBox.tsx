@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import '../globals.css';
 import ParamControl from './paramControl';
 
 interface BoiteProps {

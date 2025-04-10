@@ -1,7 +1,6 @@
-import computeRMSE from "./computeRMSE";
-import rmseToScore from "./rsmeToScore";
-import { CreateSignal } from "@/components/CreateSignalSum";
-import SIGNALS_TO_GUESS from './fiveLevelsSignals';
+import computeScoreRMSE from "./computeScoreRMSE";
+import { CreateSignal } from "@/components/maths/CreateSignalSum";
+import SIGNALS_TO_GUESS from './SignalsToGuess';
 
 const computeScore = (
   levelsParams: ParamSet[][],
@@ -13,10 +12,7 @@ const computeScore = (
     const refSignal = SIGNALS_TO_GUESS[index][1];
 
     const hasRightNumber = params.length === numSinus[index];
-    const rmse = computeRMSE(refSignal, userSignal);
-
-    // RMSE transformé en score, à ajuster selon la tolérance
-    const rmseScore = rmseToScore(rmse); // max 0.5
+    const rmseScore = computeScoreRMSE(refSignal, userSignal);
     const countScore = hasRightNumber ? 0.5 : 0;
 
     return {
