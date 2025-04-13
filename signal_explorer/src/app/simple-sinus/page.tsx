@@ -17,7 +17,7 @@ import SliderAmpl from './sliderAmpl';
 import SliderPhase from './sliderPhase';
 
 // Autres imports spécifiques
-import Explications from './explication';
+import Explications from './explicationSignal';
 import '../globals.css';
 
 // Hooks et logique
@@ -34,27 +34,45 @@ export default function SimpleSinus() {
   
   return (
     <div >
-      <h1 className="text-2xl font-bold text-center mt-4">Onde sinusoïdale &#128526;</h1>
-    
+      <h1 className="text-2xl font-bold text-center mt-4">
+        Qu'est-ce qu'un signal ?
+      </h1>
+
+      <div className="w-full flex justify-center mt-6">
+        <div className="max-w-4xl px-6 py-4 bg-muted rounded-xl text-lg text-muted-foreground text-center">
+          <p className="font-semibold">
+            Pour le comprendre, observons une onde sinusoïdale.
+          </p>
+          <p className="mt-2">
+            Tu peux en modifier les paramètres 🎛️ à ta guise et observer ce que ça change sur sa forme temporelle et fréquentielle et sur le son associé.
+          </p>
+        </div>
+      </div>
       <div className="relative flex justify-center gap-2 w-full max-w-full mx-auto py-8">
+
               {/* Plot temporel */}
-        <div className="flex-[1] item-center min-w-0">
+        <div className="flex-[1] item-center">
           <TemporalPlot xValues={xValues} signal={signal} title={'Signal temporel'} yRange={[-1.05, 1.05]}/>
           <SliderFreq value={frequence} onChange={setFrequence}/>
           <SliderPhase value={phase} onChange={setPhase}/>
         </div>
+
         <SliderAmpl  value={amplitude} onChange={setAmplitude}/>
-        <div className="flex-[1] min-w-0 transform -translate-x-18">   
+
+            {/* Plot fréquentiel */}
+        <div className="flex-[1]">   
             <FFTPlot signal={signal} Fe={44100} yRange={[0, 1.05]}/>
         </div>                
       </div>
 
       <SoundPlayer signal={signal} sampleRate={44100} />
+
+          {/* Navigation */}
       <div className="flex items-center space-x-4">
         <BackHomeButton/>
             <InfoPopup 
-              title={"Qu'est-ce que la transformée de Fourier ?"} 
-              message={<Explications />} 
+              title={"Qu'est-ce qu'un signal ?"} 
+              pages= {Explications}
             />
       </div>
         <NextButton route="/multiple-sinus" />

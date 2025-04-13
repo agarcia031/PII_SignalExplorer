@@ -9,5 +9,3 @@ number {
     const maxRMSE = 2; // à ajuster selon l'échelle
     const clamped = Math.min(rmse, maxRMSE);
     return (1 - clamped / maxRMSE) * 0.5;};
-
-

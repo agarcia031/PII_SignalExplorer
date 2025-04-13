@@ -1,45 +1,45 @@
 import { CreateSignal} from "@/components/maths/CreateSignalSum";
 
-// Signal 1 – 2 sinusoïdes
+// Signal 1 – 2 sinusoïdes : une base claire avec un petit twist
 const level1: ParamSet[] = [
-    { frequence: 869, amplitude: 0.8, phase: 0 },           
-    { frequence: 422, amplitude: 0.6, phase: Math.PI/2 },
-];
-
-// Signal 2 – 3 sinusoïdes
-const level2: ParamSet[] = [
-    { frequence: 98, amplitude: 1, phase: 0 },         
-    { frequence: 608, amplitude: 0.5, phase: Math.PI/3 },
-    { frequence: 990, amplitude: 0.25, phase: Math.PI/6 },
-];
-
-// Signal 3 – 3 sinusoïdes non-harmoniques (plus complexe)
-const level3: ParamSet[] = [
-    { frequence: 220, amplitude: 0.8, phase: 0 },         // La2
-    { frequence: 500, amplitude: 0.4, phase: Math.PI/4 },
-    { frequence: 750, amplitude: 0.3, phase: Math.PI/2 },
-];
-
-// Signal 4 – 5 sinusoïdes (riches harmoniques)
-const level4: ParamSet[] = [
-    { frequence: 196, amplitude: 1, phase: 0 },           // Sol3
-    { frequence: 392, amplitude: 0.5, phase: Math.PI/3 },
-    { frequence: 588, amplitude: 0.25, phase: Math.PI/6 },
-    { frequence: 784, amplitude: 0.125, phase: Math.PI/2 },
-    { frequence: 980, amplitude: 0.0625, phase: Math.PI/4 },
-];
-
-// Signal 5 – 8 sinusoïdes (ultra complexe, genre son synthétique ou instrument à timbre riche)
-const level5: ParamSet[] = [
-    { frequence: 261.63, amplitude: 1.0, phase: 0 },      // Do4
-    { frequence: 523.25, amplitude: 0.7, phase: Math.PI/5 },
-    { frequence: 784.88, amplitude: 0.5, phase: Math.PI/4 },
-    { frequence: 1046.5, amplitude: 0.35, phase: Math.PI/2 },
-    { frequence: 1318.5, amplitude: 0.25, phase: Math.PI/3 },
-    { frequence: 1567.98, amplitude: 0.15, phase: Math.PI/6 },
-    { frequence: 1760.0, amplitude: 0.1, phase: Math.PI/8 },
-    { frequence: 1975.53, amplitude: 0.07, phase: Math.PI/10 },
-];
+    { frequence: 432, amplitude: 0.75, phase: 0 },            // Fréquence "naturelle"
+    { frequence: 689, amplitude: 0.55, phase: Math.PI / 3 },  // complémentaire
+  ];
+  
+  // Signal 2 – 3 sinusoïdes : comme un accord bizarre mais doux
+  const level2: ParamSet[] = [
+    { frequence: 110, amplitude: 1, phase: 0 },               // La2
+    { frequence: 347, amplitude: 0.6, phase: Math.PI / 4 },
+    { frequence: 645, amplitude: 0.3, phase: Math.PI / 2 },
+  ];
+  
+  // Signal 3 – 3 sinusoïdes, un peu planant / électro
+  const level3: ParamSet[] = [
+    { frequence: 293.66, amplitude: 0.7, phase: 0 },          // Ré4
+    { frequence: 415.30, amplitude: 0.5, phase: Math.PI / 5 }, // Sol#4
+    { frequence: 783.99, amplitude: 0.35, phase: Math.PI / 3 }, // Sol5
+  ];
+  
+  // Signal 4 – 5 sinusoïdes : comme un instrument à anches
+  const level4: ParamSet[] = [
+    { frequence: 196, amplitude: 0.9, phase: 0 },             // Sol3
+    { frequence: 370, amplitude: 0.6, phase: Math.PI / 6 },
+    { frequence: 520, amplitude: 0.35, phase: Math.PI / 2 },
+    { frequence: 768, amplitude: 0.2, phase: Math.PI / 3 },
+    { frequence: 1020, amplitude: 0.1, phase: Math.PI / 4 },
+  ];
+  
+  // Signal 5 – 8 sinusoïdes : son de synthé profond & riche
+  const level5: ParamSet[] = [
+    { frequence: 261.63, amplitude: 1.0, phase: 0 },            // Do4
+    { frequence: 311.13, amplitude: 0.8, phase: Math.PI / 8 },  // Ré#4
+    { frequence: 370.0, amplitude: 0.6, phase: Math.PI / 6 },   // Fa#4
+    { frequence: 440.0, amplitude: 0.4, phase: Math.PI / 4 },   // La4
+    { frequence: 554.37, amplitude: 0.3, phase: Math.PI / 3 },  // Do#5
+    { frequence: 659.25, amplitude: 0.2, phase: Math.PI / 2 },  // Mi5
+    { frequence: 830.61, amplitude: 0.12, phase: Math.PI / 5 }, // Sol#5
+    { frequence: 987.77, amplitude: 0.08, phase: Math.PI / 7 }, // Si5
+  ];
 
 const SIGNALS_TO_GUESS: [number[], number[]][] = [
     CreateSignal(level1),

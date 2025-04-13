@@ -98,8 +98,8 @@ export default function Jeu() {
             [levelsParams, level]
         );
 
-        // SCORES
-       const scores = computeScore(levelsParams);
+    // SCORES
+    const scores = computeScore(levelsParams);
     
     // Réinitialiser les paramètres dans le localStorage et dans le state
     const resetLevelsParams = () => {
@@ -120,9 +120,13 @@ export default function Jeu() {
   
   return (
     <div>
-        <div className="text-center mt-4">
-            <h1 className="text-2xl font-bold">A toi de jouer 😎!</h1>
-            <h2 className="text-lime-700 xl">Sauras-tu recréer ce signal ?</h2>
+        <div className="text-center mt-4 space-y-1">
+            <h1 className="text-2xl font-bold text-gray-800">À toi de jouer 😎 !</h1>
+            <h2 className="text-lg text-blue-700 font-semibold tracking-wide">Sauras-tu recréer ces signaux ?</h2>
+            <p className="text-gray-600 text-base">
+                Utilise les concepts que tu viens de découvrir pour essayer de recréer ces signaux<br />
+                à partir de leurs deux représentations. Attention, ça devient de plus en plus corsé !
+            </p>
         </div>
         
         <div className="flex">
@@ -133,12 +137,14 @@ export default function Jeu() {
 
         {/* Colonne de droite */}
         <div className="w-1/2 p-4 flex justify-center">
+        <div className="w-full h-64">
             <TemporalPlot
             xValues={signalChoosen[0]}
             signal={signalChoosen[1]}
             title=""
             yRange={[-1.5, 1.5]}
             />
+        </div>
         </div>
         </div>
 
